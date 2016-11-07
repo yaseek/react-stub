@@ -9,9 +9,10 @@ import { $log } from '../services/log'
 class News extends Component {
 
   componentDidMount () {
-    $log.debug('NEWS PROPS', this.props, !!this.props.route.actions)
-    if (!!this.props.actions) {
-      this.props.actions.getNews();
+    $log.debug('MOUNT NEWS', this.props, !!this.props.route.actions)
+
+    if (this.props.actions) {
+      this.props.actions.getNews()
     }
   }
 
@@ -27,15 +28,16 @@ class News extends Component {
   }
 }
 
-const mapStateToProps = state => { 
-        return { 
-          articles: state.news.articles 
-        } 
-      },
-      mapDispatchToProps = dispatch => {
-        return {
-          actions: bindActionCreators(newsActions, dispatch)
-        }
-      }
+const 
+  mapStateToProps = state => { 
+    return { 
+      articles: state.news.articles 
+    } 
+  },
+  mapDispatchToProps = dispatch => {
+    return {
+      actions: bindActionCreators(newsActions, dispatch)
+    }
+  }
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)

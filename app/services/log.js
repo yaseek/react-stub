@@ -1,4 +1,3 @@
-
 class LogProvider {
 
   constructor () {
@@ -8,31 +7,29 @@ class LogProvider {
   }
 
   debugEnabled (val) {
-    this.flags.debug = val;
+    this.flags.debug = val
   }
 }
 
 class Log {
 
   constructor (provider) {
-    this._provider = provider;
+    this._provider = provider
   }
 
   get $provider () {
-    return this._provider;
+    return this._provider
   }
 
   debug (...args) {
-    let provider = this._provider;
 
-    if (provider.flags.debug) {
-      console.log.apply(null, args)
+    if (this._provider.flags.debug) {
+      window.console.debug.apply(null, args)
     }
   }
+  
 }
 
-const $log = new Log(new LogProvider())
-
-module.exports.$log = $log
+let $log = module.exports.$log = new Log(new LogProvider())
 module.exports.$logProvider = $log.$provider
 
